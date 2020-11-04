@@ -33,14 +33,18 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
-  ratings = rating_list.split(',')
-  ratings.each do |rating|
-    check = uncheck.nil?
-    if check
-      check('ratings_' + rating)
-    else 
-      uncheck('ratings_' + rating)
-    end
+  #ratings = rating_list.split(',')
+  #ratings.each do |rating|
+    #check = uncheck.nil?
+    #if check
+      #check('ratings_' + rating)
+    #else 
+      #uncheck('ratings_' + rating)
+    #end
+  #end
+  check_or_not = uncheck ? "uncheck" : "check"
+  rating_list.delete(' ').split(',').each do |rating|
+    steps `When I #{check_or_not} "ratings_#{rating}"`
   end
   #fail "Unimplemented"
 end
