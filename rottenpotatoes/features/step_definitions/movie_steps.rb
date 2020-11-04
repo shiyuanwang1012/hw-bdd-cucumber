@@ -22,7 +22,7 @@ Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #fail "Unimplemented"
   m1 = page.body.index(e1)
   m2 = page.body.index(e2)
-  m1 < m2
+  m1 <= m2
 end
 
 # Make it easier to express checking or unchecking several boxes at once
