@@ -38,6 +38,8 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
     check = uncheck.nil?
     if check
       step "I check 'ratings_#{rating}' "
+    else 
+      step "I uncheck 'ratings_#{rating}' "
     end
   end
   #fail "Unimplemented"
