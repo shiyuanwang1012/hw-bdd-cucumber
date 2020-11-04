@@ -51,7 +51,13 @@ end
 
 Then /I should see all the movies/ do
   # Make sure that all the movies in the app are visible in the table
-  Movie.all.count == 10
+  #Movie.all.count == 10
+  rows = page.all(:xpath, "//tbody//tr").length
+  movies = Movie.all
+  expect(rows).to eq movies.length
+  movies.each do |movie|
+    steps `Then I should see "#{movie.title}"`
+  end
   #fail "Unimplemented"
 end
 
