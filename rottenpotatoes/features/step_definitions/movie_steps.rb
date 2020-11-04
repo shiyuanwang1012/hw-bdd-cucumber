@@ -43,7 +43,7 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
     #end
   #end
   check_or_not = uncheck ? "uncheck" : "check"
-  rating_list.delete(' ').split(',').each do |rating|
+  rating_list.split(',').each do |rating|
     steps `When I #{check_or_not} "ratings_#{rating}"`
   end
   #fail "Unimplemented"
