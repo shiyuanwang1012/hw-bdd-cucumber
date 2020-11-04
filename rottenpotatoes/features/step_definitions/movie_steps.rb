@@ -6,7 +6,6 @@ Given /the following movies exist/ do |movies_table|
     # you should arrange to add that movie to the database here.
     Movie.create!(movie)
   end
-  #fail "Unimplemented"
 end
 
 Then /(.*) seed movies should exist/ do | n_seeds |
@@ -22,7 +21,6 @@ Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   m1 = page.body.index(e1)
   m2 = page.body.index(e2)
   m1 <= m2
-  #fail "Unimplemented"
 end
 
 # Make it easier to express checking or unchecking several boxes at once
@@ -33,15 +31,6 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
-  #ratings = rating_list.split(',')
-  #ratings.each do |rating|
-    #check = uncheck.nil?
-    #if check
-      #check('ratings_' + rating)
-    #else 
-      #uncheck('ratings_' + rating)
-    #end
-  #end
   rating_list.split(/\s*,\s*/).each do |rating|
     if uncheck.nil?
       step %Q{I check "ratings_#{rating}"}
@@ -49,7 +38,6 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
       step %Q{I uncheck "ratings_#{rating}"}
     end
   end
-  #fail "Unimplemented"
 end
 
 Then /I should see all the movies/ do
@@ -59,12 +47,15 @@ Then /I should see all the movies/ do
 end
 
 Then /I should( not)? see the following movies: (.*)/ do |unsee, movie_list|
-  see = unsee ? " not" : ""
-  movie_list.split(/\s*,\s*/).each do |movie|
-    movie = movie.strip
-    step %Q{I should#{see} see "#{movie}"}
+  if unsee.nil?
+    movie_list.split(/\s*,\s*/).each do |movie|
+      step %Q{I should see "#{movie}"}
+    end
+  else
+    movie_list.split(/\s*,\s*/).each do |movie|
+      step %Q{I should not see "#{movie}"}
+    end
   end
-  #fail "Unimplemented"
 end
 
 When /I press 'ratings_submit'/ do
