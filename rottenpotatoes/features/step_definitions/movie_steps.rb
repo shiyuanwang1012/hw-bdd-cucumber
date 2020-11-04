@@ -55,7 +55,8 @@ Then /I should see all the movies/ do
   #fail "Unimplemented"
 end
 
-Then /I should (not?) see the following movies: (.*)/ do |see, movie_list|
+Then /I should (not?) see the following movies: (.*)/ do |notsee, movie_list|
+  see = notsee ? " not" : ""
   movies = movie_list.split(',')
   movies.each do |movie|
     movie = movie.strip
