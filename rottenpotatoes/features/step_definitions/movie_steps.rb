@@ -54,3 +54,11 @@ Then /I should see all the movies/ do
   Movie.all.count == 10
   #fail "Unimplemented"
 end
+
+Then /I should (not?) see the following movies: (.*)/ do |see, movie_list|
+  movies = movie_list.split(',')
+  movies.each do |movie|
+    movie = movie.strip
+    steps 'Then I should#{see} #{movie}'
+  end
+end
