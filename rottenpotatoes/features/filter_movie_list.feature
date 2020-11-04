@@ -26,9 +26,9 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   # enter step(s) to check the 'PG' and 'R' checkboxes
   # enter step(s) to uncheck all other checkboxes
   # enter step to "submit" the search form on the homepage
-  Given I check the following ratings: PG, R
+  When I check the following ratings: PG, R
   And I uncheck the following ratings: G, PG-13, NC-17
-  And I press 'Refresh'
+  And I press 'ratings_submit'
   # enter step(s) to ensure that PG and R movies are visible
   # enter step(s) to ensure that other movies are not visible
   Then I should see the following movies: 'The Terminator', 'When Harry Met Sally', 'Amelie', 'The Incredibles', 'Raiders of the Lost Ark'
@@ -37,5 +37,5 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
 Scenario: all ratings selected
   # see assignment
   When I check the following ratings: PG, R, G, PG-13, NC-17
-  And I press 'Refresh'
+  And I press 'ratings_submit'
   Then I should see all the movies
