@@ -43,7 +43,6 @@ end
 Then /I should see all the movies/ do
   # Make sure that all the movies in the app are visible in the table
   Movie.all.count == 10
-  #fail "Unimplemented"
 end
 
 Then /I should( not)? see the following movies: (.*)/ do |unsee, movie_list|
